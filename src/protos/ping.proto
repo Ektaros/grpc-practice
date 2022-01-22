@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service PingService {
+  rpc ping (Empty) returns (Pong) {}
+  rpc pingWithData (SomeComplexData) returns (SomeComplexData) {}
+} 
+
+message Empty {}
+
+message SomeComplexData {
+  
+}
+
+message Pong {
+  string ping = 1;
+}
