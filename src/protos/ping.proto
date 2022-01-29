@@ -1,14 +1,42 @@
 syntax = "proto3";
+import "google/protobuf/any.proto";
 
 service PingService {
-  rpc ping (Empty) returns (Pong) {}
-  rpc pingWithData (SomeComplexData) returns (SomeComplexData) {}
+  rpc ping (Empty) returns (Pong);
+  rpc pingWithData (SomeComplexData) returns (JSONResponce);
 } 
 
 message Empty {}
 
 message SomeComplexData {
-  
+  google.protobuf.Any details = 1; // seems like it doesn't work yet
+  oneof testOneof {
+    string name = 2;
+    SubMessage subMessage = 3;
+  };
+  map<string, SubMessage> testMap = 4;
+  enum Type {
+    UNIVERSAL = 0;
+    WEB = 1;
+    IMAGES = 2;
+    LOCAL = 3;
+    NEWS = 4;
+    PRODUCTS = 5;
+    VIDEO = 6;
+  }
+  Type type = 5;
+}
+
+message SubMessage {
+  string message = 1;
+  float number = 2;
+  repeated string names = 3;
+}
+
+message JSONResponce {
+  string message = 1;
+  SomeComplexData.Type type = 3;
+  string json = 2;
 }
 
 message Pong {

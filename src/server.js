@@ -2,10 +2,10 @@ const grpc = require('@grpc/grpc-js')
 
 
 class GrpcServer {
-  constructor(host, port, services, implementations) {
+  constructor(host, port, protos, implementations) {
     this.server = new grpc.Server()
     this.ready = new Promise(resolve => {
-      Object.keys(services).forEach(name => this.server.addService(services[name], implementations[name]))
+      Object.keys(protos).forEach(name => this.server.addService(protos[name].service, implementations[name]))
 
       this.server.bindAsync(`${host}:${port}`, grpc.ServerCredentials.createInsecure(), (error, port) => {
         console.log('error', error)

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+service ChainService {
+  rpc addChain (stream Chain) returns (stream Chain);
+} 
+
+message Chain {
+  string chain = 1;
+}

@@ -1,3 +1,5 @@
 module.exports = {
-  ping: require('./ping')
+  Ping: require('./ping'),
+  Chain: require('./chain'),
+  Notifications: require('./notifications')
 }

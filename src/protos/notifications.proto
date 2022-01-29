@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+service NotificationsService {
+  rpc notifyUsers (NotifyRequest) returns (stream NotifyResponse);
+  rpc notificationStats (stream NotificationResult) returns (NotificationStats);
+} 
+
+enum Status {
+  unknown = 0;
+  success = 1;
+  fail = 2;
+}
+message NotificationResult {
+  int32 id = 1;
+  Status status = 2;
+  int32 timeToProcess = 3;
+}
+message NotificationStats {
+  int32 count = 1;
+  map<string, string> statusDistribution = 2;
+  map<string, string> timeToProcessDistribution = 3;
+}
+
+message NotifyRequest {
+  repeated int32 userIds = 1;
+  string event = 2;
+}
+message NotifyResponse {
+  Status status = 1;
+  int32 id = 2;
+  int64 date = 3;
+}

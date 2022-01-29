@@ -1,3 +1,6 @@
 module.exports = {
-  PingClient: require('./PingClient')
+  PingClient: require('./PingClient'),
+  ChainClient: require('./ChainClient'),
+  NotificationsClient: require('./NotificationsClient'),
+  GrpcClient: require('./GrpcClient')
 }
